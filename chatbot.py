@@ -44,6 +44,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         c = self.connection
         commandList = cmd.split()
         command = commandList[0]
+        
         if command == "test":
             print("current command: {} ".format(commandList))
         elif command == "ship":
