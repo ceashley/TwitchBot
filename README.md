@@ -1,5 +1,3 @@
-CabinBoyBot
-
 # Commands
 
 ### !ship shipname
