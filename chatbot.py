@@ -44,17 +44,22 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             cmd = e.arguments[0][1:]
             print ('Received command: ' + cmd)
             self.do_command(e, cmd)
+        elif e.arguments[0][:1] == '#':
+            cmd = e.arguments[0]
+            print ('Received command: ' + cmd)
+            self.do_command(e, cmd)
         return
 
     def do_command(self, e, cmd):
         c = self.connection
         commandList = cmd.split()
-        command = commandList[0]
+        command = commandList[0].lower()
 
-
+        #test command
         if command == "test":
             print("current command: {} ".format(commandList))
 
+        #ship command for eveuni link
         elif command == "ship":            
             shipList = self.shipList
             ship = commandList[1].lower()
@@ -65,6 +70,13 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
                 message = ship + " is not a ship"
                 c.privmsg(self.channel, message)
             print("processed command ship for " + ship)
+
+        # #blame command
+        elif "#blame" in command:
+            person = command.split("#blame")
+            person = person[1].title()
+            message = "#Blame" + person
+            c.privmsg(self.channel,message)
         # The command was not recognized
         else:
             print("Did not understand command: " + cmd)
